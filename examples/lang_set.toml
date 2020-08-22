@@ -1,0 +1,15 @@
+[langs.ru]
+"table" = "таблица"
+"team" = "сторона"
+"input number" = "введите число"
+"Error" = "Ошибка"
+"win" = "победил"
+"nobody" = "никто"
+
+[langs.en]
+"table" = "table"
+"team" = "side"#player
+"input number" = "input number"
+"Error" = "Error"
+"win" = "win"
+"nobody" = "nobody"
