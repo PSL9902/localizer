@@ -18,6 +18,6 @@ edition = "2018"
 
 [dependencies]
 toml = "0.5.6"
-lazy_static = "*"
-serde = "*"
+lazy_static = "1.4.0"
+serde = "1.0.115"
 
