@@ -1,4 +1,5 @@
 **Simple library for localization used in rust projects.**
+
 #Example
 ---
 ```rust
