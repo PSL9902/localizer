@@ -1,7 +1,7 @@
-#Simple library for localization used in rust projects\.
-##Example\:
-
-``` rust
+**Simple library for localization used in rust projects.**
+#Example
+---
+```rust
 use localizer::*;
 const langs_file : &str = "
 [langs.ru]
