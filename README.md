@@ -1,7 +1,6 @@
 # Simple library for localization used in rust projects.
 
 ## Examples:
----
 ### 1:
 ```rust
 use localizer::*;
