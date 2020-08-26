@@ -111,9 +111,24 @@ impl Localizer {
 			res_keeper::None => None,
 		}
 	}
-	/*pub fn get_1(&self, key : &str, val2 : String) -> String {
-		self.get(key).unwrap_or(val2)
-	}*/
+	pub fn get1(&self, key : &str) -> Vec<String> {
+		#[cfg(debug)]
+		println!("{:?}", self.res);
+		match &self.res
+		{
+			res_keeper::file(file) => {
+					let mut buf_reader = BufReader::new(file);
+					let mut string = String::new();
+					match buf_reader.read_to_string(&mut string) {
+						Ok(_) => (),
+						_ => return Vec::new(),
+					};
+					self.ser_form.get1(&string, key)
+				}
+			res_keeper::string(ref string) => { self.ser_form.get1(string, key) }
+			res_keeper::None => Vec::new(),
+		}
+	}
 }
 
 impl Default for Localizer {

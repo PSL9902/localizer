@@ -49,6 +49,12 @@ pub fn get_by_key2(key : &str, val2 : String) -> String
 {
 	get_by_key(key).unwrap_or(val2)
 }
+
+///returns Vec of value from dictionary
+pub fn get_by_key3(key : &str) -> Vec<String>
+{
+	LANGS.read().unwrap().get1(key)
+}
 ///changes language, dictionary, etc
 pub fn change_localizer(f : &dyn Fn(&mut Localizer) -> ())
 {
