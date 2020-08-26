@@ -32,3 +32,4 @@ assert!(localizer::get_by_key3("ex1") == vec!["ПРН".to_string(), "saПРA".to
 ```
 ### 3:
 [Tic_Tac_Toe game](https://github.com/PSL9902/rust_Tic_Tac_Toe/tree/master)
+and more in [examples](https://github.com/PSL9902/localizer/tree/master/examples)
