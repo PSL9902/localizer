@@ -1,6 +1,14 @@
 #![allow(dead_code)]
-use std::fs::File;
 
+#[cfg(not(feature = "no_std"))]
+pub mod standart;
+#[cfg(not(feature = "no_std"))]
+pub use standart::*;
+
+#[cfg(feature = "format")]
+pub mod form;
+#[cfg(feature = "format")]
+pub use form::*;
 
 #[allow(non_camel_case_types)]
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -26,7 +34,7 @@ impl serialize_form {
 			//_ => unimplemented!(),
 		}
 	}
-	pub fn get(&self, string : &String, key : &str, current_lang : &Option<String>) -> Option<String> {
+	pub fn get(&self, string : &str, key : &str, current_lang : &Option<String>) -> Option<String> {
 		match self {
 			serialize_form::toml => {
 						use toml::{de::{Deserializer}, value::Value};
@@ -63,8 +71,9 @@ impl serialize_form {
 			serialize_form::json => {
 						use json::{parse, JsonValue, object::Object};
 						
-						let d = parse(&string).ok()?;
 						
+						let d = parse(&string).unwrap();//.ok()?;
+						//println!("{:?}", d);
 						if !d.is_object()
 						{
 							#[cfg(debug)]
@@ -72,6 +81,7 @@ impl serialize_form {
 							#[cfg(not(debug))]
 							unimplemented!();
 						}
+						//println!("{:?}", d);
 						fn as_table(var : &JsonValue) -> Option<&Object>
 						{
 							match var {
@@ -83,8 +93,10 @@ impl serialize_form {
 							JsonValue::Object(table) => table,
 							_ => return None,
 						};
+						//println!("{:?}", table);
 						
 						let langs = as_table(table.get("langs")?)?;
+						//println!("{:?}", langs);
 						
 						let lang = match current_lang {
 							Some(ref x) if langs.get(x.as_str()).is_some() => x.to_string(),
@@ -100,7 +112,7 @@ impl serialize_form {
 			//_ /*| serialize_form::json*/ => { unimplemented!() }
 		}
 	}
-	pub fn get1(&self, string : &String, key : &str) -> Vec<String> {
+	pub fn get1(&self, string : &str, key : &str) -> Vec<String> {
 		match self {
 			serialize_form::toml => {
 						use toml::{de::{Deserializer}, value::Value};
@@ -166,87 +178,4 @@ impl serialize_form {
 
 impl Default for serialize_form {
 	fn default() -> Self { Self::toml }
-}
-
-#[derive(Debug)]
-#[allow(non_camel_case_types)]
-pub enum res_keeper
-{
-	file(File),
-	string(String),
-	None,
-}
-impl res_keeper {
-	pub fn as_str(&self) -> &str {match self{Self::file(_) => "file", Self::string(_) => "string", Self::None => "None"}}
-	pub fn new_file(res : Option<File>) -> Self {
-		match res {
-			Some(file) => Self::file(file),
-			None => Self::None,
-		}
-	}
-	pub fn new_string(res : Option<String>) -> Self {
-		match res {
-			Some(string) => Self::string(string),
-			None => Self::None,
-		}
-	}
-	pub fn set_file(&mut self, res : Option<File>) {
-		match res {
-			Some(file) => {*self = Self::file(file);}
-			None => {*self = Self::None;}
-		}
-	}
-	pub fn set_string(&mut self, res : Option<String>) {
-		match res {
-			Some(string) => {*self = Self::string(string);}
-			None => {*self = Self::None;}
-		}
-	}
-	pub fn get_file(self) -> Option<File> {
-		match self {
-			Self::file(file) => Some(file),
-			_ => None
-		}
-	}
-	pub fn get_string(self) -> Option<String> {
-		match self {
-			Self::string(string) => Some(string),
-			_ => None
-		}
-	}
-	pub fn is_file(&self) -> bool {
-		match self {
-			Self::file(_) => true,
-			_ => false
-		}
-	}
-	pub fn is_string(&self) -> bool {
-		match self {
-			Self::string(_) => true,
-			_ => false
-		}
-	}
-}
-
-impl Default for res_keeper {
-	fn default() -> Self { Self::None }
-}
-
-impl From<Option<File>> for res_keeper {
-	fn from(item : Option<File>) -> Self
-	{
-		match item {
-			Some(file) => res_keeper::file(file),
-			None => res_keeper::None
-		}
-	}
-}
-impl From<Option<String>> for res_keeper {
-	fn from(item : Option<String>) -> Self
-	{
-		match item {
-			Some(string) => res_keeper::string(string),
-			None => res_keeper::None
-		}
-	}
 }

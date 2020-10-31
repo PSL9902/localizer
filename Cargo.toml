@@ -1,12 +1,12 @@
 [package]
 name = "localizer"
-version = "0.2.4"
+version = "0.3.0"
 authors = ["Pavel Lazarev"]
 
 license = "MIT"
 readme = "README.md"
 repository = "https://github.com/PSL9902/localizer.git"
-documentation = "https://docs.rs/localizer/0.2.3/localizer/"
+documentation = "https://docs.rs/localizer/"
 homepage = "https://crates.io/crates/localizer"
 description = """
 Simple library for localization.
@@ -15,6 +15,9 @@ keywords = ["localization",]
 categories = ["localization", "no-std"]
 edition = "2018"
 
+[features]
+no_std = []
+#default = ["dsstd"]
 
 [dependencies]
 toml = "0.5.6"
