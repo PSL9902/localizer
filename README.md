@@ -1,5 +1,6 @@
 # Simple library for localization used in rust projects.
 [![Current Crates.io Version](https://img.shields.io/crates/v/localizer.svg)](https://crates.io/crates/localizer)
+[![Document](https://img.shields.io/badge/doc-localizer-green.svg)](https://docs.rs/localizer)
 ## Examples:
 ### 1:
 ```rust
