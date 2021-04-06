@@ -1,1 +1,1 @@
-pub static STD_PATH : &'static str = "lang_set.toml";//"../../res/lang_set.toml";//
+pub static STD_PATH: &str = "."; //"../../res/lang_set.toml";//

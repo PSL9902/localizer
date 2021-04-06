@@ -1,6 +1,6 @@
-#![allow(non_upper_case_globals, unused_imports, dead_code)]
-extern crate localizer;
-use std::time::{self, Duration, SystemTime};
+#![allow(non_upper_case_globals)] //dead_code
+
+//use std::time::{self, Duration, SystemTime};
 
 static let_x: &str = "    
 \\  /
@@ -28,9 +28,11 @@ impl GameObj {
         }
         Self { table: tab }
     }
+    #[allow(dead_code)]
     fn printmach(&self) -> Vec<u8> {
         self.table.clone()
     }
+    #[allow(dead_code)]
     fn retfreecells(&self) -> Vec<u8> {
         let mut res = Vec::new();
         for (_num, _i) in self.table.iter().enumerate() {
@@ -85,6 +87,7 @@ impl GameObj {
         }
         0
     }
+    #[allow(dead_code)]
     fn who_win_wteam(&self, team: u8) -> u8 {
         let win_pos = vec![
             (0, 1, 2),
@@ -149,6 +152,7 @@ impl GameObj {
         }
         Ok("".to_string())
     }
+    #[allow(dead_code)]
     fn print(&self) {
         println!("{}:", localizer::get_by_key1("table".to_string()));
         println!("=======");
@@ -163,7 +167,9 @@ impl GameObj {
                 if (num + 1) % 3 == 0 {
                     println!("|");
                 }
-            } else/* if *_i==0*/ {
+            } else
+            /* if *_i==0*/
+            {
                 print!("| ");
                 if (num + 1) % 3 == 0 {
                     println!("|");
@@ -283,19 +289,29 @@ fn newgame() {
     }
 }
 
-use std::io::{self, Stdout, Write};
+use std::io::{
+    self,
+    Write,
+    //Stdout
+};
+
 use std::u8;
 fn main() {
     print!("select language [0:\"ru\", 1:\"en\"]: ");
     std::io::stdout().flush().unwrap();
+
     let mut lang = String::new();
     std::io::stdin().read_line(&mut lang).unwrap();
     let lang = match lang.trim_end() {
         "0" | "ru" => "ru",
         _ => "en",
     };
+    localizer::set_loc_string(include_str!("lang_set.toml"));
+
     localizer::change_localizer(&|x| {
-        x.set_current_lang(Some(lang.to_string()));
+        x.get_mut_res().res_into_ld().unwrap();
+        x.get_mut_properties()
+            .set_current_lang(Some(lang.to_string()));
     });
     loop {
         newgame();
