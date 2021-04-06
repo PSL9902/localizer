@@ -9,7 +9,7 @@ Simple library for localization used in rust projects.
 [![Current Crates.io Version](https://img.shields.io/crates/v/localizer.svg)](https://crates.io/crates/localizer)
 [![Document](https://img.shields.io/badge/doc-localizer-green.svg)](https://docs.rs/localizer)
 ## Examples:
-> cargo run --examples 
+> cargo run --example %example%
 ### 1: [ex1](https://github.com/PSL9902/localizer/blob/master/examples/ex1.rs)
 ### 2: [ex2](https://github.com/PSL9902/localizer/blob/master/examples/ex2.rs)
 ### 3:
