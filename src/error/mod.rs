@@ -1,6 +1,7 @@
 use crate::prelude::{
     fmt::{self, Debug, Display},
     Into, String,
+    ToString,
 };
 pub enum Error {
     String(String),
@@ -46,6 +47,6 @@ impl Into<Error> for String {
 
 impl Into<Error> for &str {
     fn into(self) -> Error {
-        Error::String(self.to_owned())
+        Error::String(self.to_string())
     }
 }

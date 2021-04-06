@@ -4,6 +4,7 @@ pub use alloc::{
     collections::btree_map::BTreeMap,
     string::{String, ToString},
     vec::Vec,
+    format,
 };
 pub use core::{
     str::FromStr,

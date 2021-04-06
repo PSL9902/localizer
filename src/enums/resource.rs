@@ -21,7 +21,10 @@ impl Resource {
         Self::RawRes(
             Box::new(res),
             Box::new(serializer),
+            #[cfg(feature = "std")]
             serialize_format.unwrap_or(SerializeForm::Toml),
+            #[cfg(not(feature = "std"))]
+            serialize_format.unwrap_or(SerializeForm::Json),
         )
     }
     pub fn new_langs_dictionary(res: LangsDictionary) -> Self {
@@ -78,15 +81,14 @@ impl Resource {
     }
 
     pub fn set_serialize_form(&mut self, val: Option<SerializeForm>) {
+        #[cfg(feature = "std")]
         if let Self::RawRes(_, _, ref mut serialize_format) = self {
             *serialize_format = val.unwrap_or(SerializeForm::Toml);
         }
-        /*match self {
-            Self::RawRes(_, _, ref mut serialize_format) => {
-                *serialize_format = val.unwrap_or(SerializeForm::Toml);
-            }
-            _ => (),
-        }*/
+        #[cfg(not(feature = "std"))]
+        if let Self::RawRes(_, _, ref mut serialize_format) = self {
+            *serialize_format = val.unwrap_or(SerializeForm::Json);
+        }
     }
     pub fn get_serialize_form(&self) -> Option<&SerializeForm> {
         match self {
@@ -128,10 +130,6 @@ impl Resource {
         if let Self::RawRes(ref mut res, _, _) = self {
             res.as_mut().set_string(string);
         }
-        /*match self {
-            Self::RawRes(ref mut res, _, _) => res.as_mut().set_string(string),
-            _ => (),
-        }*/
     }
 
     pub fn res_into_string(&mut self) -> Option<()> {

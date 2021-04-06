@@ -8,6 +8,7 @@ pub use std::{
     string::{String, ToString},
     sync::RwLock,
     vec::Vec,
+    format,
 };
 
 pub(crate) use crate::{

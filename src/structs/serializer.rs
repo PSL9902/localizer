@@ -1,4 +1,4 @@
-use crate::{enums::SerializeForm, structs::LangsDictionary, traits::Serializer, Error};
+use crate::{enums::SerializeForm, structs::LangsDictionary, traits::Serializer, Error, prelude::format};
 
 impl Serializer for StandartSerializer {
     fn serialize(
@@ -7,11 +7,13 @@ impl Serializer for StandartSerializer {
         serialize_format: &SerializeForm,
     ) -> Result<LangsDictionary, Error> {//Option<LangsDictionary> {//
         match serialize_format {
+            #[cfg(feature = "std")]
             SerializeForm::Toml => toml::from_str(string)
                 .map_err(|x| format!("disp: |{}|, debug: |{:?}|", x, x).into()),
             SerializeForm::Json => serde_json::from_str(string)
                 .map_err(|x| format!("disp: |{}|, debug: |{:?}|", x, x).into()),
-            SerializeForm::Another(_) => Err(format!("").into()), //{None}//
+            SerializeForm::Another(_) => Err("".into()), //{None}//
+            
         }
     }
 }
