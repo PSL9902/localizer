@@ -10,6 +10,7 @@ Simple library for localization used in rust projects.
 [![Document](https://img.shields.io/badge/doc-localizer-green.svg)](https://docs.rs/localizer)
 ## Examples:
 ### 1:
+
 ```rust
 use localizer::*;
 const langs_file : &str = "
