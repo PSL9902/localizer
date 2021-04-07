@@ -1,6 +1,6 @@
 [package]
 name = "localizer"
-version = "0.3.0"
+version = "0.3.5"
 authors = ["Pavel Lazarev"]
 
 license = "MIT"
