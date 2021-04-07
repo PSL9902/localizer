@@ -15,3 +15,8 @@ Simple library for localization used in rust projects.
 ### 3:
 [Tic_Tac_Toe game1](https://github.com/PSL9902/localizer/blob/master/examples/tic-tac-toe.rs)
 [Tic_Tac_Toe game2](https://github.com/PSL9902/rust_Tic_Tac_Toe/tree/master)
+## No-Std:
+> feature = "no_std"
+
+### Cargo.toml:
+> localizer = {version = ..., default-features = false, features = ["no_std"]}
