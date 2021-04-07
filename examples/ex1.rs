@@ -1,4 +1,4 @@
-use localizer::{enums::{res_keeper, Resource}, structs::StdandartSerializer, Localizer};
+use localizer::{enums::{res_keeper, Resource}, structs::StandartSerializer, Localizer};
 use std::fs::OpenOptions;
 
 fn main() {
@@ -16,7 +16,7 @@ fn main() {
         .open("./examples/lang_set1.toml");
     loc.set_res(Resource::new_raw_res(
         res_keeper::new_file(file.ok()),
-        StdandartSerializer::new(),
+        StandartSerializer::new(),
         None,
     ));
 
