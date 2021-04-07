@@ -14,4 +14,6 @@ Simple library for localization used in rust projects.
 > feature = "no_std"
 
 ### Cargo.toml:
-> localizer = {version = ..., default-features = false, features = ["no_std"]}
+```toml
+localizer = {version = ..., default-features = false, features = ["no_std"]}
+```
