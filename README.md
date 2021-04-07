@@ -1,9 +1,4 @@
 # Localizer
-
-```toml
-[dependencies]
- localizer= "0.3.0"
-```
 Simple library for localization used in rust projects.
 
 [![Current Crates.io Version](https://img.shields.io/crates/v/localizer.svg)](https://crates.io/crates/localizer)
