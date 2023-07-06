@@ -23,7 +23,7 @@ no_std = ["serde/alloc", "serde_json/alloc", "lazy_static/spin_no_std"]
 
 
 [dependencies]
-spin = "0.9.0"
+spin = "0.9.8"
 toml = { version = "0.5.6", optional = true, default-features = false }
 serde_json = { version = "1.0.64", optional = true, default-features = false }
 lazy_static = { version = "1.4.0", optional = true, default-features = false }
